@@ -21,7 +21,7 @@ function change()
             var SKUId = productLink.substring(posOfSKUId);
             var itemId = productLink.substring(productLink.lastIndexOf("i") + 1, posOfSKUId - 2);
             var finalLink = "https://www.lazada.vn/wow/gcp/vn/trade/shipping?spm=a2o4n.pdp_revamp.main_page.bottom_bar_main_button&buyParams=%7B%22items%22%3A%5B%7B%22itemId%22%3A%22" + itemId + "%22%2C%22skuId%22%3A%22" + SKUId + "%22%2C%22quantity%22%3A1%2C%22attributes%22%3Anull%7D%5D%7D&from_pdp_buy_now=1&pwa_true_login=1";
-            var APILink = "https://my.lazada.vn/wishlist/api/addItem?itemId=" + itemId + "&skuId=" + SKUId;
+            var APILink = "avascript: async function postData(url=\"\", data = {})\n{ const response = await fetch(url, {\nmethod: \"POST\",\nheaders: {\n\"content-type\": \"application/json;charset=UTF-8\",},\nreferrer: \"https://www.lazada.vn/\",\nreferrerPolicy: \"strict-origin-when-cross-origin\",\nmode: \"cors\",\nbody: \"{}\",\ncredentials: \"include\",});\nreturn response.json();}\npostData(\"https://my.lazada.vn/wishlist/api/addItem?itemId="+ itemId + "&skuId="+ SKUId + "\", {}).then((data) => { console.log(data);});";
             document.getElementById("finalLink").value = finalLink;
             document.getElementById("APILink").value = APILink;
             document.getElementById("hrefLink").setAttribute("href", finalLink);
