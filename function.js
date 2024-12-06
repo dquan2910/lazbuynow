@@ -7,7 +7,7 @@ function change()
     }
     else
     {
-        var posOfTemp = productLink.indexOf(".html?");
+        var posOfTemp = productLink.indexOf(".html");
         if(posOfTemp == -1)
         {
             document.getElementById("thongbaoLink").innerHTML = "Link chưa hợp lý";
