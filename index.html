@@ -17,8 +17,8 @@
         <input type="number" id="quantity" min="1" max="5">
         <br>
         <div style="width: 100%; padding-top: 1%; text-align: center">
-        <button type="submit" style="width: 49%; font-size: 15px; font-weight: bold" class="btn btn-primary" onclick="change()">CHUYỂN ĐỔI</button>
-        <button type="submit" style="width: 49%; font-size: 15px; font-weight: bold" class="btn btn-danger" onclick="reset()">RESET</button>
+        <button type="submit" style="width: 49%; font-size: 15px; font-weight: bold" class="btn btn-primary" onclick="Change()">CHUYỂN ĐỔI</button>
+        <button type="submit" style="width: 49%; font-size: 15px; font-weight: bold" class="btn btn-danger" onclick="Reset()">RESET</button>
     </div>
         <div style="padding-top: 2%;">
             <span style="font-weight: bold; font-size: 19px;">Link Buy Now:</span>
@@ -26,18 +26,10 @@
         <textarea id="finalLink"readonly></textarea>
         <p id="thongbaoLink" style="color: red; font-weight: bold; max-height: 0.7%; text-align: center;">&nbsp;</p>
         <div style="text-align: center; padding-bottom: 10px;">
-        <button style="width: 49%; font-size: 15px; font-weight: bold" class="btn btn-success" onclick="copyLink()">COPY</button>
+        <button style="width: 49%; font-size: 15px; font-weight: bold" class="btn btn-success" onclick="CopyLink()">COPY</button>
         <a id="hrefLink" href="#"><button style="width: 49%; font-size: 15px; font-weight: bold" class="btn btn-info">NHẢY LINK</button>
         </a>
-        </div>
-        <div>
-            <span style="font-weight: bold; font-size: 19px;">API Wishlist JavaScript:</span>
-        </div>
-        <textarea id="APILink"readonly style="height: 50px;"></textarea>
-        <p id="thongbaoAPI" style="color: red; font-weight: bold; max-height: 0.7%; text-align: center;">&nbsp;</p>
-        <div style="text-align: center;">
-            <button style="width: 100%; font-size: 15px; font-weight: bold" class="btn btn-warning" onclick="copyAPI()">COPY</button>
-        </div>
+    </div>
     </body>
     <style>
         textarea
