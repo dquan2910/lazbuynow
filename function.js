@@ -42,7 +42,7 @@ function ToBuyNowLink(productLink)
         var finalLink = "https://www.lazada.vn/wow/gcp/vn/trade/shipping?spm=a2o4n.pdp_revamp.main_page.bottom_bar_main_button&buyParams=%7B%22items%22%3A%5B%7B%22itemId%22%3A%22" + itemId + "%22%2C%22skuId%22%3A%22" + SKUId + "%22%2C%22quantity%22%3A"+ qty + "%2C%22attributes%22%3Anull%7D%5D%7D&from_pdp_buy_now=1&pwa_true_login=1";
         document.getElementById("finalLink").value = finalLink;
         document.getElementById("hrefLink").setAttribute("href", finalLink);
-        document.getElementById("thongbaoLink").innerHTML = `Thành công. itemID: ${itemId} - skuID:${SKUId} - SL:${qty}`;
+        document.getElementById("thongbaoLink").innerHTML = `Thành công. item: ${itemId} - sku: ${SKUId} - SL: ${qty}`;
     }
 }
 
