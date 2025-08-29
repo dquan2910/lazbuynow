@@ -1,44 +1,33 @@
 <head>
-    <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-    <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="function.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap&subset=vietnamese" rel="stylesheet">
 </head>
-    <body style="padding-left: 10px; padding-right: 10px;">
+    <body>
         <div style="justify-content: center; padding-top: 1%">
-            <span style="font-weight: bold; font-size: 19px;">Link sản phẩm:</span>
-        <br>
+            <span class="title">Link sản phẩm:</span>
         <textarea id="productLink"></textarea>
-        <span style="font-weight: bold; font-size: 19px;">Số lượng:</span>
-        <input type="number" id="quantity" min="1" max="5">
-        <br>
-        <div style="width: 100%; padding-top: 1%; text-align: center">
-        <button type="submit" style="width: 49%; font-size: 15px; font-weight: bold" class="btn btn-primary" onclick="Change()">CHUYỂN ĐỔI</button>
-        <button type="submit" style="width: 49%; font-size: 15px; font-weight: bold" class="btn btn-danger" onclick="Reset()">RESET</button>
+        <div style="padding-top: 1%;">
+            <span class="title">Số lượng:</span>
+            <input type="number" id="quantity" min="1" max="5">
+        </div>
+        <div class="btn-line">
+            <button type="submit" class="btn btn-primary" onclick="Change()">CHUYỂN ĐỔI</button>
+            <button type="submit" class="btn btn-danger" onclick="Reset()">RESET</button>
+        </div>
     </div>
-        <div style="padding-top: 2%;">
-            <span style="font-weight: bold; font-size: 19px;">Link Buy Now:</span>
+        <div style="padding-top: 1%;">
+            <span class="title">Link:</span>
         </div>
         <textarea id="finalLink"readonly></textarea>
-        <p id="thongbaoLink" style="color: red; font-weight: bold; max-height: 0.7%; text-align: center;">&nbsp;</p>
-        <div style="text-align: center; padding-bottom: 10px;">
-        <button style="width: 49%; font-size: 15px; font-weight: bold" class="btn btn-success" onclick="CopyLink()">COPY</button>
-        <a id="hrefLink" href="#"><button style="width: 49%; font-size: 15px; font-weight: bold" class="btn btn-info">NHẢY LINK</button>
-        </a>
+        <p id="thongbaoLink"></p>
+        <div class="btn-line">
+            <button class="btn btn-success" onclick="CopyLink()">COPY</button>
+            <a id="hrefLink" href="#" class="btn btn-info">NHẢY LINK</a>
+        </div>
     </div>
     </body>
-    <style>
-        textarea
-        {
-            width: 100%;
-            height: 150px;
-            box-sizing: border-box;
-            -webkit-box-sizing: border-box;
-            -moz-box-sizing: border-box;
-            resize: none;
-        }
-    </style>
