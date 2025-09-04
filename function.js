@@ -104,3 +104,122 @@ function Reset()
     document.getElementById("hrefLink").href = "#";
     document.getElementById("thongbaoLink").innerHTML = "";
 }
+
+function ResetV2()
+{
+    document.getElementById("finalLink").value = "";
+    document.getElementById("hrefLink").href = "#";
+    document.getElementById("thongbaoLink").innerHTML = "";
+    let table = document.getElementById("myTable");
+    while (table.rows.length > 2)
+        table.deleteRow(-1);
+    let inputs = table.getElementsByTagName("input");
+    let textarea = table.getElementsByTagName("textarea");
+    for (let i = 0; i < inputs.length; i++)
+    {
+        inputs[i].value = "";
+        textarea[i].value = "";
+    }
+}
+
+async function ChangeV2()
+{
+    document.getElementById("thongbaoLink").innerHTML = "Đang chuyển đổi....";
+    let table = document.getElementById("myTable");
+    var thongbao = "";
+    var thongbaoLinkChanged = "";
+    var finalLink = "https://www.lazada.vn/wow/gcp/vn/trade/shipping?spm=a2o4n.pdp_revamp.main_page.bottom_bar_main_button&buyParams=%7B%22items%22%3A%5B";
+    for (let i = 1; i < table.rows.length; i++)
+    {
+        let row = table.rows[i];
+        let link = row.cells[1].querySelector("textarea").value.trim();
+        var linkChanged = await ChangeLink(link);
+        if(linkChanged.indexOf("itemId") == -1)
+        {
+            thongbao = thongbao + `Link ${i}: ${linkChanged}<br>`;
+        }
+        else
+        {
+            var qtyraw = row.cells[2].querySelector("input").value.trim();
+            let qty = 1;
+            if(qtyraw != "")
+            qty = parseInt(qtyraw, 10);
+            if(qty < 1)
+            qty = 1;
+            linkChanged = linkChanged + qty + "%2C%22attributes%22%3Anull%7D";
+            if(finalLink.indexOf("itemId") != -1) // đã có
+                finalLink = finalLink + "%2C";
+            finalLink = finalLink + linkChanged;
+            if(thongbaoLinkChanged != "")
+                thongbaoLinkChanged = thongbaoLinkChanged + ", ";
+            thongbaoLinkChanged = thongbaoLinkChanged + `Link ${i} - SL: ${qty}`
+        }
+    }
+    if(finalLink.indexOf("itemId") == -1)
+        document.getElementById("thongbaoLink").innerHTML = "Tất cả link đều lỗi";
+    else
+    {
+        finalLink = finalLink + "%5D%7D&from_pdp_buy_now=1&pwa_true_login=1";
+        document.getElementById("finalLink").value = finalLink;
+        document.getElementById("hrefLink").setAttribute("href", finalLink);
+        thongbao = thongbao + `Chuyển đổi thành công ${thongbaoLinkChanged}`;
+        document.getElementById("thongbaoLink").innerHTML = thongbao;
+    }
+}
+async function ChangeLink(productLink)
+{
+    if(productLink == "")
+    {
+        return await "Link trống";
+    }
+    if(productLink.includes("lazada.vn/products/") || productLink.includes("lazada.vn/i"))
+    {
+        var posOfTemp = productLink.indexOf(".html");
+        if(posOfTemp == -1)
+            return await "Link chưa hợp lý";
+        return await ToBuyNowLinkV2(productLink);
+    }
+    else if(productLink.includes("s.lazada.vn") || productLink.includes("c.lazada.vn"))
+    {
+        return await FetchLinkV2(productLink);
+    }
+    else
+        return await "Link chưa hợp lý";
+    
+}
+async function ToBuyNowLinkV2(productLink)
+{
+    var posOfTemp = productLink.indexOf(".html");
+    productLink = productLink.substring(0, posOfTemp);
+    var posOfSKUId = productLink.lastIndexOf("-s") + 2;
+    if(posOfSKUId == 1) return await "Link thiếu skuID";
+    else
+    {
+        var SKUId = productLink.substring(posOfSKUId);
+        var itemId = productLink.substring(productLink.lastIndexOf("i") + 1, posOfSKUId - 2);
+        return await "%7B%22itemId%22%3A%22" + itemId + "%22%2C%22skuId%22%3A%22" + SKUId + "%22%2C%22quantity%22%3A";
+    }
+}
+async function FetchLinkV2(productLink)
+{
+    try
+    {
+        const proxy = "https://cosr-proxy.dongquanmaingoc2910.workers.dev/?url=" + encodeURIComponent(productLink);
+        const res = await fetchWithTimeout(proxy, {}, 10000);
+        if (!res.ok) throw new Error("Bad HTTP status " + res.status);
+        const data = await res.json().catch(() => ({}));
+        const longLink = data?.longUrl;
+        if (!longLink || longLink === productLink) return "Link sai. Vui lòng kiểm tra lại";
+        else return ToBuyNowLinkV2(longLink);
+    }
+    catch(e)
+    {
+        return "Vui lòng dùng tạm link dài";
+    }
+}
+function fetchWithTimeout(url, opts = {}, ms = 10000) {
+  const controller = new AbortController();
+  const id = setTimeout(() => controller.abort(), ms);
+  return fetch(url, { ...opts, signal: controller.signal })
+    .finally(() => clearTimeout(id));
+}
