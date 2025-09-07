@@ -1,0 +1,33 @@
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="function.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap&subset=vietnamese" rel="stylesheet">
+</head>
+<body>
+    <div id="info">Đang tải...</div>
+</body>
+<script>
+    fetch("version.json").then(res => res.json())
+    .then(data => {
+        const latestVersionNumber = data.version[0].number;
+        let html = `<h2>Phiên bản hiện tại: ${latestVersionNumber}</h2>`;
+        
+        data.version.forEach(v =>{
+            const items = v.info.split("/n").filter(x => x.trim() !== "");
+            const list = "<ul>" + items.map(x => `<li>${x}</li>`).join("") + "</ul>";
+            html +=
+            `
+                <h3>${v.number}</h3>
+                <p><strong>Ngày cập nhật:</strong> ${v.date}<br><strong>Các thay đổi:</strong><br>${list}</p>
+            `
+        });
+        document.getElementById("info").innerHTML = html;
+    })
+    .catch(err =>{
+        document.getElementById("info").innerHTML = "Lỗi: " + err;
+    })
+</script>

@@ -8,26 +8,72 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap&subset=vietnamese" rel="stylesheet">
 </head>
     <body>
-        <div style="justify-content: center; padding-top: 1%">
-            <span class="title">Link sản phẩm:</span>
-        <textarea id="productLink"></textarea>
-        <div style="padding-top: 1%;">
-            <span class="title">Số lượng:</span>
-            <input type="number" id="quantity" min="1" max="5">
+        <a id="current-version" href="log.html" style="text-align: center;"target="_blank"></a>
+        <div id="div-top-btn">
+            <a href="v1.html"><button id="btn-temp" class="btn" style="background-color: #7744EC;">TRỞ VỀ BẢN CŨ</button></a>
+        </div>
+        <table id="myTable" style="width: 100%;">
+        <tr>
+            <th style="text-align: center; width: 10%;">STT</th>
+            <th style="text-align: center; width: 75%">Link sản phẩm</th>
+            <th style="text-align: center; width: 15%">SL</th>
+        </tr>
+        <tr>
+            <th style="text-align: center;">1</th>
+            <td><textarea style="width: 100%; box-sizing: border-box; height: 40px; border: none; outline: none;  resize: vertical; word-break: break-all;"></textarea>
+            <td><input style="width: 100%; box-sizing: border-box;  border: none; outline: none;" type="number"/></td>
+        </tr>
+        </table>
+        <div class="btn-line">
+            <button type="submit" class="btn" onclick="addRow()" style="background-color: #16DF6D">THÊM DÒNG MỚI</button>
+            <button type="submit" class="btn" onclick="deleteRow()" style="background-color: #ECA344">XÓA DÒNG CUỐI</button>
+        </div>
         </div>
         <div class="btn-line">
-            <button type="submit" class="btn btn-primary" onclick="Change()">CHUYỂN ĐỔI</button>
-            <button type="submit" class="btn btn-danger" onclick="Reset()">RESET</button>
+            <button type="submit" class="btn btn-primary" onclick="ChangeV2()">CHUYỂN ĐỔI</button>
+            <button type="submit" class="btn btn-danger" onclick="ResetV2()">RESET</button>
         </div>
     </div>
         <div style="padding-top: 1%;">
             <span class="title">Link:</span>
         </div>
         <textarea id="finalLink"readonly></textarea>
-        <p id="thongbaoLink"></p>
         <div class="btn-line">
             <button class="btn btn-success" onclick="CopyLink()">COPY</button>
             <a id="hrefLink" href="#" class="btn btn-info">NHẢY LINK</a>
         </div>
+        <p id="thongbaoLink"></p>
     </div>
     </body>
+
+<script>
+function addRow()
+{
+    let table = document.getElementById("myTable");
+    let rowCount = table.rows.length;
+    let newRow = table.insertRow(-1);
+    let cell1 = newRow.insertCell(0);
+    cell1.style.textAlign = "center";
+    cell1.style.fontWeight = "bold";
+    cell1.innerHTML = rowCount;
+    let cell2 = newRow.insertCell(1);
+    cell2.innerHTML = '<textarea style="width: 100%; box-sizing: border-box; height: 40px; border: none; outline: none;  resize: vertical; word-break: break-all;">';
+    let cell3 = newRow.insertCell(2);
+    cell3.innerHTML = '<input style="width: 100%; box-sizing: border-box;  border: none; outline: none;" type="number">';
+}
+function deleteRow()
+{
+    let table = document.getElementById("myTable");
+    let rowCount = table.rows.length;
+    if(rowCount > 2)
+    {
+        table.deleteRow(rowCount -1)
+    }
+}
+fetch("version.json").then(res => res.json())
+.then(data =>{
+    let latestVersion = data.version[0];
+    var versionValue = `${latestVersion.number} - ${latestVersion.date} &#9432;`
+    document.getElementById("current-version").innerHTML = versionValue;
+})
+</script>

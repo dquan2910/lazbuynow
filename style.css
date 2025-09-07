@@ -39,7 +39,25 @@ textarea
     resize: none;
 }
   th, td {
-    border: 1px solid black; /* border cho bảng */
+    border: 1px solid black;
     padding: 5px;
     text-align: center;
   }
+#div-top-btn
+{
+    padding-bottom: 1%;
+}
+#btn-temp
+{
+    width: 100%;
+}
+#current-version {
+  display: block;
+  width: fit-content;
+  margin: 0px auto;
+  padding-top: 1%;
+  font-size: 15px;
+  font-weight: bold;
+  color: #0066cc;
+  text-decoration: none;
+}

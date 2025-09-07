@@ -1,0 +1,45 @@
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="function.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap&subset=vietnamese" rel="stylesheet">
+</head>
+    <body>
+        <a id="current-version" href="log.html" style="text-align: center;"target="_blank"></a>
+         <div id="div-top-btn">
+            <a href="index.html"><button id="btn-temp" class="btn" style="background-color: #7744EC;">CHUYỂN SANG BẢN MỚI</button></a>
+        </div>
+        <div style="justify-content: center;">
+            <span class="title">Link sản phẩm:</span>
+        <textarea id="productLink"></textarea>
+        <div style="padding-top: 1%;">
+            <span class="title">Số lượng:</span>
+            <input type="number" id="quantity" min="1" max="5">
+        </div>
+        <div class="btn-line">
+            <button type="submit" class="btn btn-primary" onclick="Change()">CHUYỂN ĐỔI</button>
+            <button type="submit" class="btn btn-danger" onclick="Reset()">RESET</button>
+        </div>
+    </div>
+        <div style="padding-top: 1%;">
+            <span class="title">Link:</span>
+        </div>
+        <textarea id="finalLink"readonly></textarea>
+        <div class="btn-line">
+            <button class="btn btn-success" onclick="CopyLink()">COPY</button>
+            <a id="hrefLink" href="#" class="btn btn-info">NHẢY LINK</a>
+        </div>
+        <p id="thongbaoLink"></p>
+    </div>
+    </body>
+<script>
+fetch("version.json").then(res => res.json())
+.then(data =>{
+    let latestVersion = data.version[0];
+    var versionValue = `${latestVersion.number} - ${latestVersion.date} &#9432;`
+    document.getElementById("current-version").innerHTML = versionValue;
+})
+</script>

@@ -1,0 +1,39 @@
+{
+    "version":[
+        {
+            "number": "v3.1.0",
+            "date": "07/09/2025",
+            "info": "Ra mắt chính thức version mới - chuyển đổi nhiều link thành 1 link./nThêm nút chuyển đổi qua lại giữa các bản./nThêm log thông tin phiên bản./nChỉnh sửa thông báo trong quá trình chuyển đổi nhiều link./nThêm button XÓA DÒNG CUỐI./nThay đổi button THÊM LINK thành THÊM DÒNG MỚI./n[Bản cũ] Di chuyển thông báo xuống dưới để dễ quan sát."
+        },
+        {
+            "number": "v3.0.0",
+            "date": "04/09/2025",
+            "info": "BIG UPDATE - Thêm version mới với cơ chế chuyển đổi nhiều link thành 1 link./nUpdate thông báo mới./nThêm thông báo trong quá trình chuyển đổi./nChỉnh sửa thông báo./nChỉnh sửa giao diện."
+        },
+        {
+            "number": "v2.2.0",
+            "date": "2025",
+            "info": "Thay đổi proxy Cloudfare dành cho chuyển đổi link ngắn - ổn định hơn, tốc độ cải thiện./nThêm trường hợp chuyển đổi link."
+        },
+        {
+            "number": "v2.1.0",
+            "date": "2025",
+            "info": "Thêm proxy free để chuyển đổi link ngắn."
+        },
+        {
+            "number": "v2.0.0",
+            "date": "2024",
+            "info": "Hiệu chỉnh nhập số lượng./nThêm trường hợp cho loại link mới./nThay đổi số lượng cho link buy now có sẵn."
+        },
+        {
+            "number": "v1.1.0",
+            "date": "2024",
+            "info": "Thêm ô nhập thay đổi số lượng"
+        },
+        {
+            "number": "v1.0.0",
+            "date": "2024",
+            "info": "Chuyển đổi link buy now cơ bản."
+        }
+    ]
+}

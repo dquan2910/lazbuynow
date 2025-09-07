@@ -19,7 +19,7 @@ function Change()
     else if(productLink.includes("https://www.lazada.vn/wow/gcp"))
         ChangeQty(productLink);
     else
-        document.getElementById("thongbaoLink").innerHTML = "Link chưa hợp lý";
+        document.getElementById("thongbaoLink").innerHTML = "Link trống";
 
 }
 function ToBuyNowLink(productLink)
@@ -124,13 +124,14 @@ function ResetV2()
 
 async function ChangeV2()
 {
-    document.getElementById("thongbaoLink").innerHTML = "Đang chuyển đổi....";
     let table = document.getElementById("myTable");
     var thongbao = "";
     var thongbaoLinkChanged = "";
     var finalLink = "https://www.lazada.vn/wow/gcp/vn/trade/shipping?spm=a2o4n.pdp_revamp.main_page.bottom_bar_main_button&buyParams=%7B%22items%22%3A%5B";
-    for (let i = 1; i < table.rows.length; i++)
+    var qtyOfRows = table.rows.length;
+    for (let i = 1; i < qtyOfRows; i++)
     {
+        document.getElementById("thongbaoLink").innerHTML = `Đang chuyển đổi [${i}/${qtyOfRows-1}]....`;
         let row = table.rows[i];
         let link = row.cells[1].querySelector("textarea").value.trim();
         var linkChanged = await ChangeLink(link);
@@ -162,7 +163,7 @@ async function ChangeV2()
         finalLink = finalLink + "%5D%7D&from_pdp_buy_now=1&pwa_true_login=1";
         document.getElementById("finalLink").value = finalLink;
         document.getElementById("hrefLink").setAttribute("href", finalLink);
-        thongbao = thongbao + `Chuyển đổi thành công ${thongbaoLinkChanged}`;
+        thongbao = `Chuyển đổi thành công ${thongbaoLinkChanged}.<br>` + thongbao;
         document.getElementById("thongbaoLink").innerHTML = thongbao;
     }
 }
@@ -187,6 +188,7 @@ async function ChangeLink(productLink)
         return await "Link chưa hợp lý";
     
 }
+//Link ngắn thành dài
 async function ToBuyNowLinkV2(productLink)
 {
     var posOfTemp = productLink.indexOf(".html");
@@ -214,7 +216,7 @@ async function FetchLinkV2(productLink)
     }
     catch(e)
     {
-        return "Vui lòng dùng tạm link dài";
+        return "Thử bấm chuyển đổi lại";
     }
 }
 function fetchWithTimeout(url, opts = {}, ms = 10000) {
